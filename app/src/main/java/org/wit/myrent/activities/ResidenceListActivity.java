@@ -5,9 +5,12 @@ import org.wit.myrent.app.MyRentApp;
 import org.wit.myrent.models.Portfolio;
 
 import android.content.Intent;
+import android.support.v4.app.AppOpsManagerCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -20,7 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import org.wit.myrent.models.Residence;
 
-public class ResidenceListActivity extends Activity  implements AdapterView.OnItemClickListener
+public class ResidenceListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
     private ListView listView;
     private Portfolio portfolio;
@@ -50,6 +53,14 @@ public class ResidenceListActivity extends Activity  implements AdapterView.OnIt
         Intent intent = new Intent(this, ResidenceActivity.class);
         intent.putExtra("RESIDENCE_ID", residence.id);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.residencelist, menu);
+        return true;
     }
 
     @Override

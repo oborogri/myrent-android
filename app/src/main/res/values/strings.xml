@@ -8,6 +8,8 @@
     <string name="location">Location</string>
     <string name="status">Status</string>
     <string name="isrented">Rented?</string>
+    <string name="new_residence">New Residence</string>
+    <string name="settings">Settings</string>
     />
 
 </resources>
