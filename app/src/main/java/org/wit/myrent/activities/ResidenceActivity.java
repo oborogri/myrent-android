@@ -50,7 +50,6 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
         dateButton  .setOnClickListener(this);
 
         rented  = (CheckBox) findViewById(R.id.isrented);
-        rented.setOnCheckedChangeListener(this);
 
         MyRentApp app = (MyRentApp) getApplication();
         portfolio = app.portfolio;
@@ -67,7 +66,7 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
     public void updateControls(Residence residence)
     {
         geolocation.setText(residence.geolocation);
-        rented.setChecked(residence.rented);
+        rented.setOnCheckedChangeListener(this);
         dateButton.setText(residence.getDateString());
     }
 
@@ -113,6 +112,13 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
     }
 
     @Override
+    public void onPause()
+    {
+        super.onPause();
+        portfolio.saveResidences();
+    }
+
+    @Override
     public void afterTextChanged(Editable editable)
     {
         residence.setGeolocation(editable.toString());
@@ -134,4 +140,5 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
         Log.i(this.getClass().getSimpleName(), "rented Checked");
         residence.rented = isChecked;
     }
+
 }
