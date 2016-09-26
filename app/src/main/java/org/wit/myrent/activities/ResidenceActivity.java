@@ -46,7 +46,7 @@ public class ResidenceActivity extends AppCompatActivity implements TextWatcher,
 
         Long resId = (Long) getIntent().getExtras().getSerializable("RESIDENCE_ID");
         residence = portfolio.getResidence(resId);
-        
+
         if (residence != null)
         {
             updateControls(residence);
