@@ -1,4 +1,4 @@
-package org.wit.myrent;
+package org.wit.myrent.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,14 +8,17 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.text.Editable;
 
-public class MyRentActivity extends AppCompatActivity implements TextWatcher {
+import org.wit.myrent.R;
+import org.wit.myrent.models.Residence;
+
+public class ResidenceActivity extends AppCompatActivity implements TextWatcher {
     private EditText geolocation;
     private Residence residence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myrent);
+        setContentView(R.layout.activity_residence);
 
         geolocation = (EditText) findViewById(R.id.geolocation);
         residence = new Residence();
