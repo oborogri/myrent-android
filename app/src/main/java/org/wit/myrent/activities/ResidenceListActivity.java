@@ -4,8 +4,6 @@ import org.wit.myrent.R;
 import org.wit.myrent.app.MyRentApp;
 import org.wit.myrent.models.Portfolio;
 
-import android.content.Intent;
-import android.support.v4.app.AppOpsManagerCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.AdapterView;
