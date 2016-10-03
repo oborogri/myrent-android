@@ -27,6 +27,13 @@ import android.app.DatePickerDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import static org.wit.myrent.helpers.ContactHelper.getContact;
+import static org.wit.myrent.helpers.IntentHelper.selectContact;
+import android.content.Intent;
+
+import static org.wit.myrent.helpers.IntentHelper.navigateUp;
+import static org.wit.myrent.helpers.ContactHelper.sendEmail;
+
 public class ResidenceActivity extends Activity implements TextWatcher, CompoundButton.OnCheckedChangeListener, View.OnClickListener, DatePickerDialog.OnDateSetListener
 {
     private EditText geolocation;
@@ -34,6 +41,10 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
     private CheckBox rented;
     private Button dateButton;
     private Portfolio portfolio;
+    private static final int REQUEST_CONTACT = 1;
+    private Button   tenantButton;
+    private String emailAddress = "";
+    private Button   reportButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,10 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
 
         dateButton  = (Button)   findViewById(R.id.registration_date);
         dateButton  .setOnClickListener(this);
+        reportButton = (Button)   findViewById(R.id.residence_reportButton);
+        tenantButton = (Button)   findViewById(R.id.tenant);
+
+        reportButton.setOnClickListener(this);
 
         rented  = (CheckBox) findViewById(R.id.isrented);
         rented.setOnCheckedChangeListener(this);
@@ -69,6 +84,7 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
         geolocation.setText(residence.geolocation);
         rented.setChecked(residence.rented);
         dateButton.setText(residence.getDateString());
+        tenantButton.setOnClickListener(this);
     }
 
     @Override
@@ -79,18 +95,16 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //handle action bar items clicks here. The action bar will
-        //automatically handle clicks on the Home/Up button, so long
-        //as you specify a parent activity in AndroidManifest.xml
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:  navigateUp(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onClick(View view)
@@ -101,6 +115,12 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
                 DatePickerDialog dpd = new DatePickerDialog (this, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dpd.show();
                 break;
+            case R.id.tenant : selectContact(this, REQUEST_CONTACT);
+                break;
+
+            case R.id.residence_reportButton :
+                sendEmail(this, emailAddress, getString(R.string.residence_report_subject), residence.getResidenceReport(this));
+                break;
         }
     }
 
@@ -110,6 +130,22 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
         Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
         residence.date = date.getTime();
         dateButton.setText(residence.getDateString());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        switch (requestCode)
+        {
+            case REQUEST_CONTACT:
+                String name = "Empty contact list";
+                if(data != null) {
+                    name = getContact(this, data);
+                }
+                residence.tenant = name;
+                tenantButton.setText(name);
+                break;
+        }
     }
 
     @Override
@@ -134,4 +170,6 @@ public class ResidenceActivity extends Activity implements TextWatcher, Compound
         Log.i(this.getClass().getSimpleName(), "rented Checked");
         residence.rented = isChecked;
     }
+
+
 }
