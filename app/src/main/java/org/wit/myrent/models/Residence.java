@@ -3,7 +3,7 @@ package org.wit.myrent.models;
 import java.util.Date;
 import java.util.Random;
 
-import org.json.JSONException;[]
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.wit.myrent.R;
 import android.content.Context;
