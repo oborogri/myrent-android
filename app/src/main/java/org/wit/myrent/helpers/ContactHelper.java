@@ -8,7 +8,7 @@ import android.provider.ContactsContract;
 import android.content.ContentResolver;
 
 
-public class ContactHelper
+public class  ContactHelper
 {
     public static String getDisplayName(Context context, Intent data)
     {

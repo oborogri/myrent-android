@@ -2,6 +2,7 @@
 
 package org.wit.myrent.activities;
 
+<<<<<<< HEAD
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -100,13 +101,37 @@ public class ResidenceActivity extends AppCompatActivity implements TextWatcher,
     @Override
     public void onClick(View view) {
         switch (view.getId())
+=======
+
+import org.wit.myrent.R;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+
+public class ResidenceActivity extends AppCompatActivity
+{
+    ActionBar actionBar;
+
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_container);
+
+        actionBar = getSupportActionBar();
+
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
+        if (fragment == null)
+>>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358
         {
-            case R.id.registration_date      : Calendar c = Calendar.getInstance();
-                DatePickerDialog dpd = new DatePickerDialog (this, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-                dpd.show();
-                break;
+            fragment = new ResidenceFragment();
+            manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         }
     }
+<<<<<<< HEAD
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -134,3 +159,6 @@ public class ResidenceActivity extends AppCompatActivity implements TextWatcher,
     }
 
 }
+=======
+}
+>>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358

@@ -10,6 +10,7 @@ public class MyRentApp extends Application
 {
     private static final String FILENAME = "portfolio.json";
     public Portfolio portfolio;
+    protected static MyRentApp app;
 
     @Override
     public void onCreate()
@@ -17,8 +18,19 @@ public class MyRentApp extends Application
         super.onCreate();
         PortfolioSerializer serializer = new PortfolioSerializer(this, FILENAME);
         portfolio = new Portfolio(serializer);
+<<<<<<< HEAD
 
         info(this, "MyRent app launched");
     }
     
+=======
+
+        app=this;
+
+        info(this, "MyRent app launched");
+    }
+    public static MyRentApp getApp() {
+        return app;
+    }
+>>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358
 }
