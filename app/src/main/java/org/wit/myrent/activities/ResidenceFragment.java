@@ -53,7 +53,6 @@ public class ResidenceFragment extends Fragment implements TextWatcher,
     String emailAddress = "";
 
     MyRentApp app;
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -125,7 +124,6 @@ public class ResidenceFragment extends Fragment implements TextWatcher,
         super.onPause();
         portfolio.saveResidences();
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

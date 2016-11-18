@@ -5,17 +5,11 @@ import static org.wit.myrent.helpers.LogHelpers.info;
 import java.util.ArrayList;
 
 import android.util.Log;
-import static org.wit.myrent.helpers.LogHelpers.info;
 
 public class Portfolio
 {
-<<<<<<< HEAD
-    private PortfolioSerializer   serializer;
-    public ArrayList<Residence> residences;
-=======
     public  ArrayList<Residence>  residences;
     private PortfolioSerializer   serializer;
->>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358
 
     public Portfolio(PortfolioSerializer serializer)
     {
@@ -29,24 +23,6 @@ public class Portfolio
             info(this, "Error loading residences: " + e.getMessage());
             residences = new ArrayList<Residence>();
         }
-<<<<<<< HEAD
-    }
-
-    public boolean saveResidences()
-    {
-        try
-        {
-            serializer.saveResidences(residences);
-            info(this, "Residences saved to file");
-            return true;
-        }
-        catch (Exception e)
-        {
-            info(this, "Error saving residences: " + e.getMessage());
-            return false;
-        }
-=======
->>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358
     }
 
     public boolean saveResidences()
@@ -80,7 +56,6 @@ public class Portfolio
                 return res;
             }
         }
-        info(this, "failed to find residence. returning first element array to avoid crash");
         return null;
     }
 
@@ -89,8 +64,4 @@ public class Portfolio
         residences.remove(residence);
         saveResidences();
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 71a3b4e1b9d41b1028368295a43c53b64c2cb358
 }
