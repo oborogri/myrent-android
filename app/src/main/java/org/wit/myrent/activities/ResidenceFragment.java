@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import org.wit.myrent.helpers.ContactHelper;
 import org.wit.myrent.R;
 import org.wit.myrent.app.MyRentApp;
+import org.wit.myrent.helpers.IntentHelper;
 import org.wit.myrent.models.Portfolio;
 import org.wit.myrent.models.Residence;
 import android.app.Activity;
@@ -30,6 +31,7 @@ import android.widget.EditText;
 import static org.wit.myrent.helpers.ContactHelper.sendEmail;
 import static org.wit.myrent.helpers.IntentHelper.navigateUp;
 import static org.wit.myrent.helpers.IntentHelper.selectContact;
+import android.support.design.widget.FloatingActionButton;
 
 
 public class ResidenceFragment extends Fragment implements TextWatcher,
@@ -74,6 +76,9 @@ public class ResidenceFragment extends Fragment implements TextWatcher,
 
         ResidenceActivity residenceActivity = (ResidenceActivity)getActivity();
         residenceActivity.actionBar.setDisplayHomeAsUpEnabled(true);
+
+        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         addListeners(v);
         updateControls(residence);
@@ -180,6 +185,10 @@ public class ResidenceFragment extends Fragment implements TextWatcher,
             case R.id.residence_reportButton :
                 sendEmail(getActivity(), emailAddress,
                         getString(R.string.residence_report_subject), residence.getResidenceReport(getActivity()));
+                break;
+
+            case R.id.fab :
+                IntentHelper.openPreferredLocationInMap(getActivity(), residence.geolocation);
                 break;
 
         }
